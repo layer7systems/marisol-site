@@ -283,10 +283,10 @@ body.es span[data-es],body.es a[data-es]{display:inline}
 
           <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-          <div class="turnstile cf-turnstile" data-sitekey="0x4AAAAAAE1HfySSL8Ga1ABH"
+          <div class="turnstile cf-turnstile" style="display:none" data-sitekey="0x4AAAAAAE1HfySSL8Ga1ABH"
                data-theme="light" data-callback="dgTurnstileOk"></div>
 
-          <button type="submit" class="go" id="dg-submit" disabled style="background:var(--terra)">
+          <button type="submit" class="go" id="dg-submit" style="background:var(--terra)">
             <span data-en>Show me the number</span><span data-es>Muéstrenme el número</span>
           </button>
 
@@ -589,7 +589,7 @@ setLang((navigator.language||'').toLowerCase().startsWith('es'));
     if(form.company_website.value!=='') return;          // honeypot
     if(Date.now()-loadedAt<3000) return;                 // time trap
     var t=(form.querySelector('[name="cf-turnstile-response"]')||{}).value;
-    if(!t){ fail(gate.dataset.msgVerify); return; }
+    /* turnstile check bypassed while CF fixes 400020 */
 
     var p={name:form.name.value.trim(),business:form.business.value.trim(),
            email:form.email.value.trim(),trade:form.trade.value,token:t,page:location.hostname};
