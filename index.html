@@ -339,7 +339,7 @@ body.es span[data-es],body.es a[data-es]{display:inline}
           <li><span data-en>Quotes your service fee, never guesses at repair pricing</span><span data-es>Menciona su tarifa de visita, nunca inventa precios de reparación</span></li>
           <li><span data-en>Catches the calls that come after 5pm and on weekends</span><span data-es>Atiende las llamadas después de las 5pm y los fines de semana</span></li>
         </ul>
-        <a class="cardcall" href="#demogate" data-demolink><span data-en>Hear the trades line →</span><span data-es>Escuche la línea de oficios →</span></a>
+        <a class="cardcall" href="#demogate" data-demolink data-trade="plumbing"><span data-en>Hear the trades line →</span><span data-es>Escuche la línea de oficios →</span></a>
       </div>
 
       <div class="card">
@@ -351,7 +351,7 @@ body.es span[data-es],body.es a[data-es]{display:inline}
           <li><span data-en>Handles the price-shoppers so your techs don't have to</span><span data-es>Atiende a los que solo preguntan precios, para que sus técnicos no tengan que hacerlo</span></li>
           <li><span data-en>Never guesses a repair price — the car isn't on the lift yet</span><span data-es>Nunca adivina un precio — el carro todavía no está en el elevador</span></li>
         </ul>
-        <a class="cardcall" href="#demogate" data-demolink><span data-en>Hear the trades line →</span><span data-es>Escuche la línea de oficios →</span></a>
+        <a class="cardcall" href="#demogate" data-demolink data-trade="auto"><span data-en>Hear the trades line →</span><span data-es>Escuche la línea de oficios →</span></a>
       </div>
 
       <div class="card">
@@ -363,7 +363,7 @@ body.es span[data-es],body.es a[data-es]{display:inline}
           <li><span data-en>Books showings straight into your calendar</span><span data-es>Agenda visitas directo en su calendario</span></li>
           <li><span data-en>Trained to follow Fair Housing rules — never answers neighborhood questions</span><span data-es>Entrenada en las reglas de Fair Housing — nunca responde preguntas sobre vecindarios</span></li>
         </ul>
-        <a class="cardcall" href="#demogate" data-demolink><span data-en>Hear the real estate line →</span><span data-es>Escuche la línea de bienes raíces →</span></a>
+        <a class="cardcall" href="#demogate" data-demolink data-trade="realestate"><span data-en>Hear the real estate line →</span><span data-es>Escuche la línea de bienes raíces →</span></a>
       </div>
     </div>
 
@@ -521,10 +521,10 @@ body.es span[data-es],body.es a[data-es]{display:inline}
     <h2><span data-en>Call her yourself</span><span data-es>Llámela usted mismo</span></h2>
     <p class="lede"><span data-en>Don't take our word for it. Call the demo line and act like a customer with a problem — in either language. That's exactly what your callers will get.</span><span data-es>No nos crea a nosotros. Llame a la línea de demostración y actúe como un cliente con un problema — en cualquier idioma.</span></p>
     <div class="btnrow">
-      <a class="btn" href="#demogate" data-demolink>
+      <a class="btn" href="#demogate" data-demolink data-trade="plumbing">
         <span data-en>Get the trades demo number</span><span data-es>Obtener el número de oficios</span>
       </a>
-      <a class="btn alt" href="#demogate" data-demolink>
+      <a class="btn alt" href="#demogate" data-demolink data-trade="realestate">
         <span data-en>Get the real estate demo number</span><span data-es>Obtener el número de bienes raíces</span>
       </a>
     </div>
@@ -583,6 +583,11 @@ setLang((navigator.language||'').toLowerCase().startsWith('es'));
   document.querySelectorAll('[data-demolink]').forEach(function(el){
     el.addEventListener('click',function(e){
       e.preventDefault();
+      var tradeVal=el.getAttribute('data-trade');
+      if(tradeVal){
+        var sel=document.getElementById('dg-trade');
+        if(sel) sel.value=tradeVal;
+      }
       gate.scrollIntoView({behavior:'smooth',block:'center'});
       var f=document.getElementById('dg-name');
       if(f && !gate.classList.contains('done')) setTimeout(function(){f.focus();},420);
